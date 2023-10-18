@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="shortcut icon" href="image/blacklogo.webp"  type="image/x-icon">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta property="og:type" content="website" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="Assem Altamimy is a certified fitness trainer and nutrition expert who helps individuals change their mindsets and adopt healthier lifestyles. With over 9 years of experience in the fitness industry and multiple certifications, Assem offers customized fitness and nutrition programs to help clients achieve their goals through flexible plans. Learn how to improve your health and fitness with Assem Altamimy." />
+    <meta property="og:title" content="Assem Altamimy - Certified Fitness Trainer and Nutrition Expert" />
+    <meta property="og:description" content="Assem Altamimy is a certified fitness trainer and nutrition expert who helps individuals change their mindsets and adopt healthier lifestyles. With over 9 years of experience in the fitness industry and multiple certifications, Assem offers customized fitness and nutrition programs to help clients achieve their goals through flexible plans. Learn how to improve your health and fitness with Assem Altamimy." />
+
+    <link rel="stylesheet" href="css/masterform.css">
+    <link rel="stylesheet" href="css/mm.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>Form</title>
+</head>
+<body>
+    <header class="header" id="header">
+        <nav class="nav containere">
+            <a href="index.html" class="nav__logo">
+                <img src="image/whitelogo.webp" alt="" id="logo">
+                <!-- assem eltamimy -->
+            </a>
+            <div class="nav__menu" id="nav-menu">
+                <ul class="nav__list">
+                    <li class="nav__item">
+                        <a href="index.html" class="nav__link">Home</a>
+                    </li>
+                    <li class="nav__item">
+                        <a href="index.html"  class="nav__link">About</a>
+                    </li>
+                    <li class="nav__item">
+                        <a href="index.html"  class="nav__link">Transformation</a>
+                    </li>
+                    <li class="nav__item">
+                        <a href="index.html"  class="nav__link">Clients</a>
+                    </li>
+                    <li class="nav__item">
+                        <a href="index.html"  class="nav__link">Pricing</a>
+                    </li>
+                </ul>
+                <!-- close button -->
+                <div class="nav__close" id="nav-close">
+                    <i class="fa-solid fa-xmark"></i>
+                </div>
+            </div>
+            
+            <div class="nav__buttons">
+                <!-- theme change button -->
+                <i class="uil uil-moon change-theme" id="theme-button"></i>
+                <!-- toggle button -->
+                <div class="nav__toggle" id="nav-toggle">
+                    <i class="fa-solid fa-bars"></i>
+                                    </div>
+                                    <!-- <select name="" id="language-selector">
+                                        <option value="en" selected>Eg</option>
+                                        <option value="ar">ar</option>
+                                    </select> -->
+            </div>
+        </nav>
+    </header> 
+
+
+
+
+
+    <button class="button" id="toggleButton">Get Start</button>
+    <section class="wrapper hidden" id="imageSection">
+        <div class="form signup">
+    <!-- multistep form -->
+
+    
+<form id="msform">
+	<!-- progressbar -->
+	<ul id="progressbar">
+		<li class="active"></li>
+		<li></li>
+		<li></li>
+<li></li>
+<li></li>
+<li></li>
+<li></li>
+<li></li>
+<li></li>
+<li></li>
+<li></li>
+<li></li>
+<li></li>
+<li></li>
+<li></li>
+<li></li>
+<li></li>
+	</ul>
+	<!-- fieldsets -->
+    <fieldset class="fi">
+        <h2 class="fs-title">Question 1</h2>
+        <label class="lab" for="name">Your Name</label>
+        <input type="text" name="CAT_Custom_1" id="name" placeholder="Name"/>
+        <label class="lab" for="age">Your Age</label>
+<input type="number" name="CAT_Custom_2" id="age" placeholder="Age" required />
+
+<label class="lab for="email">Your Email</label>
+<input type="email" required name="email" id="email" placeholder="Email" pattern=".+@gmail\.com" title="Please enter a valid email address with the domain @gmail.com" />
+
+        <input type="button" name="next" class="next action-button" value="Next" />
+    </fieldset>
+    
+    <fieldset>
+        <h2 class="fs-title">Question 2</h2>
+        <label for="CAT_Custom_2">Your Height?</label>
+        <div class="range">
+            <div class="range__content">
+                <div class="range__slider">
+                    <div class="range__slider-line" id="range-line"></div>
+                </div>
+
+                <div class="range__thumb" id="range-thumb">
+                    <div class="range__value">
+                        <span class="range__value-number" id="range-number">50</span>
+                    </div>
+                </div>
+
+                <input type="range" class="range__input" id="range-input" min="0" max="200" value="50" step="1">
+            </div>
+        </div>
+        <input type="button" name="previous" class="previous action-button" required value="Previous" />
+        <input type="button" name="next" class="next action-button" value="Next" />
+    </fieldset>
+    
+	<!-- مُدخل نطاق الوزن -->
+    <fieldset>
+        <h2 class="fs-title">Question 3</h2>
+        <label for="range-weight">Your Weight?</label>
+        <div class="range">
+            <div class="range__content">
+                <div class="range__slider">
+                    <div class="range__slider-line" id="range-weight-line"></div>
+                </div>
+   
+                <div class="range__thumb" id="range-weight-thumb">
+                    <div class="range__value">
+                        <span class="range__value-number" id="range-weight-number">50</span>
+                    </div>
+                </div>
+
+                <input type="range" class="range__input" id="range-weight" min="0" max="150" value="50" step="1">
+            </div>
+        </div>
+        <input type="button" name="previous" class="previous action-button" required value="Previous" />
+        <input type="button" name="next" class="next action-button" value="Next" />
+    </fieldset>
+
+    
+	<fieldset>
+        <h2 class="fs-title">Question 4</h2>
+        <h3 class="fs-subtitle">How did you hear about us?</h3>
+        <!-- قم بإضافة ملصق للحقل -->
+        <!-- <label for="CAT_Custom_4">Source:</label> -->
+        <textarea class="form-control" name="CAT_Custom_4" id="CAT_Custom_4" rows="2" required onkeydown="if(this.value.length>=4000)this.value=this.value.substring(0,3999);"></textarea>
+        <input type="button" name="previous" class="previous action-button" value="Previous" />
+        <input type="button" name="next" class="next action-button" value="Next" />
+    </fieldset>
+    
+    <fieldset>
+        <h2 class="fs-title">Question 5</h2>
+        <h3 class="fs-subtitle">Did you have any of these issues with your ex coach?</h3>
+        <div class="checkbox-container">
+            <label>
+                <input class="checkboxo" type="checkbox" name="CAT_Custom_5[]" value="Workouts were too tough"> Workouts were too tough
+            </label>
+            <label>
+                <input class="checkboxo" type="checkbox" name="CAT_Custom_5[]" value="NO FOLLOW UP"> No follow-up
+            </label>
+            <label>
+                <input class="checkboxo" type="checkbox" name="CAT_Custom_5[]" value="DIDN'T MOTIVATE ME"> Didn't motivate me
+            </label>
+            <label>
+                <input class="checkboxo" type="checkbox" name="CAT_Custom_5[]" value="Nutrition plan was costly"> Nutrition plan was costly
+            </label>
+        </div>
+        <input type="button" name="previous" class="previous action-button" value="Previous" />
+        <input type="button" name="next" class="next action-button" value="Next" />
+    </fieldset>
+    
+    
+    
+    <fieldset>
+        <h2 class="fs-title">Question 6</h2>
+        <h3 class="fs-subtitle">Do you have diabetes or high blood pressure?</h3>
+        <!-- قم بإضافة ملصق للحقل -->
+        <div class="f">
+            <div class="fy">
+                <label for="diabetes-yes">Yes</label>
+                <input class="checkboxo" type="radio" name="CAT_Custom_6" id="diabetes-yes" width="15px" value="Yes" required> <!-- تعيين القيمة "نعم" للإجابة الإيجابية -->
+            </div>
+    
+            <div class="fn">
+                <label for="diabetes-no">No</label>
+                <input class="checkboxo" type="radio" name="CAT_Custom_6" id="diabetes-no" value="No" required> <!-- تعيين القيمة "لا" للإجابة السلبية -->
+            </div>
+        </div>
+    
+        <input type="button" name="previous" class="previous action-button" value="Previous" />
+        <input type="button" name="next" class="next action-button" value="Next" />
+    </fieldset>
+    
+    <fieldset>
+        <h2 class="fs-title">Question 7</h2>
+        <h3 class="fs-subtitle">Choose up to 3 types of protein you like:</h3>
+        <div class="checkbox-container">
+            <label>
+                <input class="checkboxo" type="checkbox" name="postgraduate_qualifications[]" value="Chicken Breast"> Chicken Breast
+            </label>
+            <label>
+                <input class="checkboxo" type="checkbox" name="postgraduate_qualifications[]" value="Red Meat"> Red Meat
+            </label>
+            <label>
+                <input class="checkboxo" type="checkbox" name="postgraduate_qualifications[]" value="Tilapia Fillet"> Tilapia Fillet
+            </label>
+            <label>
+                <input class="checkboxo" type="checkbox" name="postgraduate_qualifications[]" value="Salmon"> Salmon
+            </label>
+            <label>
+                <input class="checkboxo" type="checkbox" name="postgraduate_qualifications[]" value="Eggs"> Eggs
+            </label>
+            <label>
+                <input class="checkboxo" type="checkbox" name="postgraduate_qualifications[]" value="Cottage Cheese"> Cottage Cheese
+            </label>
+            <label>
+                <input class="checkboxo" type="checkbox" name="postgraduate_qualifications[]" value="Cashews"> Cashews
+            </label>
+        </div>
+    
+        <input type="button" name="previous" class="previous action-button" value="Previous" />
+        <input type="button" name="next" class="next action-button" value="Next" />
+    </fieldset>
+    
+    
+    
+    
+    <fieldset>
+        <h2 class="fs-title">Question 8</h2>
+        <h3 class="fs-subtitle">Choose up to 3 carbohydrate sources you prefer?</h3>
+        <div class="checkbox-container">
+            <label>
+                <input class="checkboxo" type="checkbox" name="carbohydrate_preference[]" value="White Rice"> White Rice
+            </label>
+            <label>
+                <input class="checkboxo" type="checkbox" name="carbohydrate_preference[]" value="Brown Rice"> Brown Rice
+            </label>
+            <label>
+                <input class="checkboxo" type="checkbox" name="carbohydrate_preference[]" value="Potatoes"> Potatoes
+            </label>
+            <label>
+                <input class="checkboxo" type="checkbox" name="carbohydrate_preference[]" value="Sweet Potatoes"> Sweet Potatoes
+            </label>
+            <label>
+                <input class="checkboxo" type="checkbox" name="carbohydrate_preference[]" value="Oats"> Oats
+            </label>
+            <label>
+                <input class="checkboxo" type="checkbox" name="carbohydrate_preference[]" value="Pasta"> Pasta
+            </label>
+            <label>
+                <input class="checkboxo" type="checkbox" name="carbohydrate_preference[]" value="Rice Cakes"> Rice Cakes
+            </label>
+        </div>
+    
+        <input type="button" name="previous" class="previous action-button" value="Previous" />
+        <input type="button" name="next" class="next action-button" value="Next" />
+    </fieldset>
+    
+    
+    <fieldset>
+        <h2 class="fs-title">Question 9</h2>
+        <h3 class="fs-subtitle">Select up to two types of nuts you like:</h3>
+        <div class="checkbox-container">
+            <label>
+                <input class="checkboxo" type="checkbox" name="food" value="Almonds"> Almonds
+            </label>
+            <label>
+                <input class="checkboxo" type="checkbox" name="food" value="Peanuts"> Peanuts
+            </label>
+            <label>
+                <input class="checkboxo" type="checkbox" name="food" value="Hazelnuts"> Hazelnuts
+            </label>
+            <label>
+                <input class="checkboxo" type="checkbox" name="food" value="Cashews"> Cashews
+            </label>
+            <label>
+                <input class="checkboxo" type="checkbox" name="food" value="Walnuts"> Walnuts
+            </label>
+            <label>
+                <input type="checkbox" name="food" value="Macadamia Nuts"> Macadamia Nuts
+            </label>
+            <label>
+                <input class="checkboxo" type="checkbox" name="food" value="Pistachios"> Pistachios
+            </label>
+        </div>
+    
+        <input type="button" name="previous" class="previous action-button" value="Previous" />
+        <input type="button" name="next" class="next action-button" value="Next" />
+    </fieldset>
+    
+    <fieldset>
+        <h2 class="fs-title">Question 10</h2>
+        <h3 class="fs-subtitle">Select up to 2 types of fruits you like:</h3>
+        <div class="checkbox-container">
+            <label>
+                <input class="checkboxo" type="checkbox" name="fruits" value="Strawberries" required> Strawberries
+            </label>
+            <label>
+                <input class="checkboxo" type="checkbox" name="fruits" value="Pineapple" required> Pineapple
+            </label>
+            <label>
+                <input class="checkboxo" type="checkbox" name="fruits" value="Cantaloupe"> Cantaloupe
+            </label>
+            <label>
+                <input class="checkboxo" type="checkbox" name="fruits" value="Kiwi"> Kiwi
+            </label>
+            <label>
+                <input class="checkboxo" type="checkbox" name="fruits" value="Green Apple"> Green Apple
+            </label>
+            
+        </div>
+    
+        <input type="button" name="previous" class="previous action-button" value="Previous" />
+        <input type="button" name="next" class="next action-button" value="Next" />
+    </fieldset>
+    
+
+    <fieldset>
+        <h2 class="fs-title">Question 11</h2>
+        <h3 class="fs-subtitle">What is your typical daily meal without any diet restrictions?</h3>
+        <!-- <label for="CAT_Custom_11">Your Answer:</label> -->
+        <input type="text" name="CAT_Custom_11" id="CAT_Custom_11" required onkeydown="if(this.value.length>=4000)this.value=this.value.substring(0,3999);" />
+        <input type="button" name="previous" class="previous action-button" value="Previous" />
+        <input type="button" name="next" class="next action-button" value="Next" />
+    </fieldset>
+    
+    
+    <fieldset>
+        <h2 class="fs-title">Question 12</h2>
+        <h3 class="fs-subtitle">What foods would you like to include in your diet?</h3>
+        <!-- <label for="diet_foods">List of Foods:</label> -->
+        <input type="text" name="diet_foods" id="diet_foods" required  onkeydown="if(this.value.length>=4000)this.value=this.value.substring(0,3999);" />
+        <input type="button" name="previous" class="previous action-button" value="Previous" />
+        <input type="button" name="next" class="next action-button" value="Next" />
+    </fieldset>
+    
+    <fieldset>
+        <h2 class="fs-title">Question 13</h2>
+        <h3 class="fs-subtitle">Foods You Can't Eat?</h3>
+        <!-- <label for="foods_not_eaten">List any foods that you can't eat:</label> -->
+        <textarea  required name="foods_not_eaten" id="foods_not_eaten" rows="4" cols="50" ></textarea>
+        <input type="button" name="previous" class="previous action-button" value="Previous" />
+        <input type="button" name="next" class="next action-button" value="Next" />
+    </fieldset>
+    
+    <fieldset>
+        <h2 class="fs-title">Question 14</h2>
+        <h3 class="fs-subtitle">Your Goal During the Follow-up Period?</h3>
+        <div class="checkbox-container">
+            <label>
+                <input class="checkboxo" type="checkbox" name="goal[]" value="Loss Weight"> Loss Weight
+            </label>
+            <label>
+                <input class="checkboxo" type="checkbox" name="goal[]" value="Gain Muscle Mass"> Gain Muscle Mass
+            </label>
+            <label>
+                <input class="checkboxo" type="checkbox" name="goal[]" value="Get Shredded"> Get Shredded
+            </label>
+            <label>
+                <input class="checkboxo" type="checkbox" name="goal[]" value="Loss Fat & Muscles"> Loss Fat & Muscles
+            </label>
+        </div>
+        <input type="button" name="previous" class="previous action-button" value="Previous" />
+        <input type="button" name="next" class="next action-button" value="Next" />
+    </fieldset>
+    
+    
+    <fieldset>
+        <h2 class="fs-title">Question 15</h2>
+        <h3 class="fs-subtitle">Do you prefer training at home or at the gym?</h3>
+        
+        <div class="f">
+            <div class="fy">
+                <label for="training-home">Home</label>
+                <input type="radio" id="training-home" name="training_location" value="home">
+            </div>
+                    
+            <div class="fn">
+                <label for="training-gym"> Gym</label>
+                <input type="radio" id="training-gym" name="training_location" value="gym">
+            </div>
+        </div>
+        
+        <input type="button" name="previous" class="previous action-button" value="Previous" />
+        <input type="button" name="next" class="next action-button" value="Next" />
+    </fieldset>
+    
+    
+    
+    <fieldset>
+        <h2 class="fs-title">Question 16</h2>
+        <h3 class="fs-subtitle">Number of Meals?</h3>
+        <div class="checkbox-container">
+            <label>
+                <input class="checkboxo" type="checkbox" name="mealCount" value="3 meals"> 3 meals
+            </label>
+            <label>
+                <input class="checkboxo" type="checkbox" name="mealCount" value="4 meals"> 4 meals
+            </label>
+            <label>
+                <input class="checkboxo" type="checkbox" name="mealCount" value="5 meals"> 5 meals
+            </label>
+            <label>
+                <input class="checkboxo" type="checkbox" name="mealCount" value="6 meals"> 6 meals
+            </label>
+        </div>
+        <input type="button" name="previous" class="previous action-button" value="Previous" />
+        <input type="button" name="next" class="next action-button" value="Next" />
+    </fieldset>
+    
+    <fieldset>
+        <h2 class="fs-title">Question 17</h2>
+        <h3 class="fs-subtitle">How Many Days Per Week Do You want To Training ?</h3>
+        <div class="radio-container">
+            <div class="ff">
+        <div class="f1">    <label class="f1">
+            <input class="radio" type="radio" name="trainingDays" value="3 days per week"> 3 days per week
+        </label></div>
+        <div class="f2">
+            <label class="f2">
+                <input class="radio" type="radio" name="trainingDays" value="3-5 days per week"> 3-5 days per week
+            </label>
+        </div>
+            <div class="f3">
+                <label class="f3">
+                    <input class="radio" type="radio" name="trainingDays" value="more than 5 days per week"> More than 5 days per week
+                </label>
+            </div>
+        </div>
+        </div>
+        <input type="button" name="previous" class="previous action-button" value="Previous" />
+        <input type="button" id="sendToWhatsApp" class="submit action-button" value="Send" />
+    </fieldset>
+    
+</section>
+
+</form>
+</div>
+ <!--========== whatsapp ==========-->
+
+       
+ <a href="https://api.whatsapp.com/send?phone=+201021271458" class="whatsapp">
+    <i class="fa-brands fa-whatsapp wahtsapp-icon"></i>
+        </a>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        // اختر زر "Send to WhatsApp" باستخدام معرف الزر
+        const sendToWhatsAppButton = document.getElementById("sendToWhatsApp");
+
+        // اضبط رقم الواتساب الهدف هنا
+        const whatsappNumber = "+201021271458";
+
+        sendToWhatsAppButton.addEventListener("click", function () {
+            // جمع جميع الإجابات من النموذج هنا واستخدامها لإنشاء الرسالة
+            const name = document.getElementById("name").value;
+            const age = document.getElementById("age").value;
+            const email = document.getElementById("email").value;
+            const rangeValue = document.getElementById("range-number").textContent; // احصل على قيمة المدى
+            const rangeWeight = document.getElementById("range-weight-number").textContent; // احصل على قيمة المدى (الوزن)
+            const source = document.getElementById("CAT_Custom_4").value; // احصل على قيمة السؤال الرابع
+            // const trainingExperience = document.getElementById("CAT_Custom_5").value; // احصل على قيمة السؤال الخامس
+            const diabetesOrHighBloodPressure = document.querySelector('input[name="CAT_Custom_6"]:checked').value; // احصل على إجابة السؤال السادس
+            // احصل على قيم البروتينات المختارة
+            const selectedProteins = Array.from(document.querySelectorAll('input[name="postgraduate_qualifications[]"]:checked'))
+            .map((checkbox) => checkbox.value)
+            .slice(0, 3)
+            .join(", ");
+             // جمع الاختيارات من السؤال الثامن (أقصى 3 اختيارات)
+        const selectedCarbohydrates = Array.from(document.querySelectorAll('input[name="carbohydrate_preference[]"]:checked'))
+            .map((checkbox) => checkbox.value)
+            .slice(0, 3)
+            .join(", ");
+               // جمع الاختيارات من السؤال التاسع (أقصى 2 اختيارات)
+        const selectedNuts = Array.from(document.querySelectorAll('input[name="food"]:checked'))
+            .map((checkbox) => checkbox.value)
+            .slice(0, 2)
+            .join(", ");
+     // جمع الاختيارات من السؤال العاشر (أقصى 2 اختيارات)
+     const selectedFruits = Array.from(document.querySelectorAll('input[name="fruits"]:checked'))
+            .map((checkbox) => checkbox.value)
+            .slice(0, 2)
+            .join(", ");
+            const dailyMeal = document.getElementById("CAT_Custom_11").value; // احصل على إجابة السؤال الحادي عشر
+            const dietFoods = document.getElementById("diet_foods").value; // احصل على إجابة السؤال الثاني عشر
+            const foodsNotEaten = document.getElementById("foods_not_eaten").value;
+            // const goal = document.getElementById("goal").value;
+            const trainingLocation = document.querySelector('input[name="training_location"]:checked').value; // احصل على مكان التدريب
+            // const mealCount = document.getElementById("mealCount").value;
+
+
+            const exCoachIssues = Array.from(document.querySelectorAll('input[name="CAT_Custom_5[]"]:checked'))
+    .map((checkbox) => checkbox.value)
+    .join(", ");
+
+
+    const selectedGoals = Array.from(document.querySelectorAll('input[name="goal[]"]:checked'))
+            .map((checkbox) => checkbox.value)
+            .join(", ");
+               // احصل على عدد الوجبات من السؤال 16 (4-5)
+        const selectedMeals = Array.from(document.querySelectorAll('input[name="mealCount"]:checked'))
+            .map((checkbox) => checkbox.value)
+            .join(", ");
+
+             // احصل على إجابة السؤال السابع عشر
+        const trainingDays = document.querySelector('input[name="trainingDays"]:checked').value;
+
+            // بناء الرسالة
+            let message = `Name: ${name}\nAge: ${age}\nEmail: ${email}\nHeight: ${rangeValue}\nWeight: ${rangeWeight}\nhear about us: ${source}\nEx Coach Issues: ${exCoachIssues}\nDiabetes or High Blood Pressure: ${diabetesOrHighBloodPressure}\nProteins: ${selectedProteins}\nCarbohydrates: ${selectedCarbohydrates}\nNuts: ${selectedNuts}\nFruits: ${selectedFruits}\nTypical Daily Meal: ${dailyMeal}\nFoods for Diet: ${dietFoods}\nFoods You Can't Eat: ${foodsNotEaten}\nGoals: ${selectedGoals}\nTraining Location: ${trainingLocation}\nNumber of Meals: ${selectedMeals}\nTraining Days: ${trainingDays}\n`;
+
+            // تشفير الرسالة لاستخدامها في رابط WhatsApp
+            const encodedMessage = encodeURIComponent(message);
+
+            // إنشاء رابط WhatsApp بناءً على الرقم والرسالة
+            const whatsappLink = `https://api.whatsapp.com/send?phone=${whatsappNumber}&text=${encodedMessage}`;
+
+            // توجيه المستخدم إلى رابط WhatsApp
+            window.location.href = whatsappLink;
+        });
+    });
+</script>
+
+
+
+
+
+
+<script>
+    /*=============== RANGE SLIDER JS FOR HEIGHT ===============*/
+const rangeThumb = document.getElementById('range-thumb');
+const rangeNumber = document.getElementById('range-number');
+const rangeLine = document.getElementById('range-line');
+const rangeInput = document.getElementById('range-input');
+
+const rangeInputSlider = () => {
+    // تحويل القيمة إلى رقم صحيح
+    const convertedValue = parseInt(rangeInput.value, 10);
+    rangeNumber.textContent = `${convertedValue} cm`;
+
+    // حساب موضع المُسَنَّن بناءً على القيمة المحددة
+    const thumbPosition = rangeInput.value / rangeInput.max;
+    const space = rangeInput.offsetWidth - rangeThumb.offsetWidth;
+    rangeThumb.style.left = thumbPosition * space + 'px';
+
+    // تحديث عرض الخط المؤشر على المُدخل
+    rangeLine.style.width = rangeInput.value + '%';
+
+    // إرسال القيمة إلى وحدة تحكم المستعرض (console)
+    console.log(`القيمة المحسوبة: ${convertedValue} cm`);
+};
+
+rangeInput.addEventListener('input', rangeInputSlider);
+rangeInputSlider();
+
+/*=============== RANGE SLIDER JS FOR WEIGHT ===============*/
+const rangeWeightThumb = document.getElementById('range-weight-thumb');
+const rangeWeightNumber = document.getElementById('range-weight-number');
+const rangeWeightLine = document.getElementById('range-weight-line');
+const rangeWeightInput = document.getElementById('range-weight');
+
+const rangeWeightInputSlider = () => {
+    // تحويل القيمة إلى رقم صحيح
+    const convertedValue = parseInt(rangeWeightInput.value, 10);
+    rangeWeightNumber.textContent = `${convertedValue} kg`;
+
+    // حساب موضع المُسَنَّن بناءً على القيمة المحددة
+    const thumbPosition = rangeWeightInput.value / rangeWeightInput.max;
+    const space = rangeWeightInput.offsetWidth - rangeWeightThumb.offsetWidth;
+    rangeWeightThumb.style.left = thumbPosition * space + 'px';
+
+    // تحديث عرض الخط المؤشر على المُدخل
+    rangeWeightLine.style.width = rangeWeightInput.value + '%';
+
+    // إرسال القيمة إلى وحدة تحكم المستعرض (console)
+    console.log(`الوزن المحسوب: ${convertedValue} kg`);
+};
+
+rangeWeightInput.addEventListener('input', rangeWeightInputSlider);
+rangeWeightInputSlider();
+
+</script>
+
+<script>
+    // احصل على الزرار والقسم الصورة
+const toggleButton = document.getElementById('toggleButton');
+const imageSection = document.getElementById('imageSection');
+
+// قم بإضافة مستمع لنقرة الزرار
+toggleButton.addEventListener('click', function () {
+    // قم بإخفاء الزرار
+    toggleButton.style.display = 'none';
+    // قم بعرض القسم الصورة
+    imageSection.style.display = 'block';
+});
+
+
+</script>
+<script>
+    /*=============== SHOW MENU ===============*/
+const navMenu = document.getElementById('nav-menu'),
+      navToggle = document.getElementById('nav-toggle'),
+      navClose = document.getElementById('nav-close')
+
+/*===== MENU SHOW =====*/
+/* Validate if constant exists */
+if(navToggle){
+    navToggle.addEventListener('click', () =>{
+        navMenu.classList.add('show-menu')
+    })
+}
+
+/*===== MENU HIDDEN =====*/
+/* Validate if constant exists */
+if(navClose){
+    navClose.addEventListener('click', () =>{
+        navMenu.classList.remove('show-menu')
+    })
+}
+
+/*=============== REMOVE MENU MOBILE ===============*/
+const navLink = document.querySelectorAll('.nav__link')
+
+const linkAction = () =>{
+    const navMenu = document.getElementById('nav-menu')
+    // When we click on each nav__link, we remove the show-menu class
+    navMenu.classList.remove('show-menu')
+}
+navLink.forEach(n => n.addEventListener('click', linkAction))
+
+</script>
+<!-- jQuery -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.9.1/jquery.min.js" type="text/javascript"></script>
+<script src="js/mianform.js"></script>
+<!-- jQuery easing plugin -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js" type="text/javascript"></script>
+</body>
+</html>
