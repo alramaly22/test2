@@ -2527,21 +2527,21 @@ body:not(.dark-theme) main {
   justify-content: center;
 }
 .plll{
-  background-image: linear-gradient(rgba(4,9,30,0.8) , rgb(4 9 30 / 50%)) ,url(../image/Untitled\ design\ \(2\).jpg);
+  background: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, 0.7)), to(rgba(0, 0, 0, 0.7))), url(../image/Untitled\ design\ \(2\).jpg) no-repeat;
+  background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url(../image/Untitled\ design\ \(2\).jpg) no-repeat;
   background-size: cover;
+  background-position: center;
   background-attachment: fixed;
-  background-position: center top;
-  background-repeat: no-repeat;
-  padding-bottom: 0;
+  text-align: center;
 }
 @media screen and (min-width: 768px) {
   .plll{
-    background-image: linear-gradient(rgba(4,9,30,0.8) , rgb(4 9 30 / 50%)) ,url(../image/jksmckj\ \(3\).jpg);
-    background-size: cover;
-    background-attachment: fixed;
-    background-position: center top;
-    background-repeat: no-repeat;
-    padding-bottom: 0;
+    background: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, 0.7)), to(rgba(0, 0, 0, 0.7))), url(../image/jksmckj\ \(3\).jpg) no-repeat;
+  background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url(../image/jksmckj\ \(3\).jpg) no-repeat;
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  text-align: center;
   }
 }
 @media screen and (min-width: 1725px) {
