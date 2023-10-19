@@ -514,7 +514,7 @@ video {
 }
 .home__image{
   position: relative;
-  height: 500px;
+  height: 450px;
   justify-self: center;
 }
 /* .mo{
@@ -2103,15 +2103,16 @@ margin: 0 .5rem;
 /* ====================Sercces============ */
 
 .program{
+  
   background-attachment: fixed;
   overflow: hidden;
-  /* height: 110vh; */
-  background-image: linear-gradient(rgba(4,9,30,0.8) , rgb(4 9 30 / 50%)) ,url(../image/Length.webp);
+  background-image: linear-gradient(rgba(4, 9, 30, 0.8), rgba(4, 9, 30, 0.5)), url(../image/Length.webp);
   background-size: cover;
   background-position: center top;
   background-repeat: no-repeat;
-  padding-bottom:0 ;
+  padding-bottom: 0;
 }
+
 .choose__overflow{
   position: relative;
 }
@@ -2181,16 +2182,16 @@ margin: 0 .5rem;
     flex-direction: column;
     row-gap: .25rem;
   }
-  .program{
+  /* .program{
     background-attachment: fixed;
     overflow: hidden;
-    /* height: 110vh; */
-    /* background-image: linear-gradient(rgba(4,9,30,0.8) , rgb(4 9 30 / 50%)) ,url(../image/width.webp); */
+    height: 110vh;
+    background-image: linear-gradient(rgba(4,9,30,0.8) , rgb(4 9 30 / 50%)) ,url(../image/width.webp);
     background-size: cover;
     background-position: center top;
     background-repeat: no-repeat;
     padding-bottom:0 ;
-  }
+  } */
   .choose__img{
     width: 195px;
     display: none;
@@ -2205,14 +2206,13 @@ margin: 0 .5rem;
   }
   .program{
     background-attachment: fixed;
-    overflow: hidden;
-    /* height: 110vh; */
-    background-image: linear-gradient(rgba(4,9,30,0.8) , rgb(4 9 30 / 50%)) ,url(../image/width.webp);
-    background-size: cover;
-    background-position: center top;
-    background-repeat: no-repeat;
-    padding-bottom:0 ;
-  }
+  overflow: hidden;
+  background-image: linear-gradient(rgba(4, 9, 30, 0.8), rgba(4, 9, 30, 0.5)), url(../image/width.webp);
+  background-size: cover;
+  background-position: center top;
+  background-repeat: no-repeat;
+  padding-bottom: 0;
+}
   .choose__content .section__data,
   .choose__description{
     text-align: initial;
@@ -2649,4 +2649,12 @@ body:not(.dark-theme) main {
 .kola{
   margin-bottom: 1rem;
   font-size: 1.1rem;
+}
+.test{
+  background-image: linear-gradient(rgba(4,9,30,0.8) , rgb(4 9 30 / 50%)) ,url(../image/WhatsApp\ Image\ 2023-10-17\ at\ 9.35.20\ PM.jpeg);
+  background-size: cover;
+  /* background-attachment: fixed; */
+  background-position: center;
+  background-repeat: no-repeat;
+  padding-bottom: 0;
 }
