@@ -2103,14 +2103,12 @@ margin: 0 .5rem;
 /* ====================Sercces============ */
 
 .program{
-  
-  background-attachment: fixed;
-  overflow: hidden;
-  background-image: linear-gradient(rgba(4, 9, 30, 0.8), rgba(4, 9, 30, 0.5)), url(../image/Length.png);
+  background: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, 0.7)), to(rgba(0, 0, 0, 0.7))), url(../image/Length.png) no-repeat;
+  background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url(../image/Length.png) no-repeat;
   background-size: cover;
   background-position: center;
-  background-repeat: no-repeat;
-  padding-bottom: 0;
+  background-attachment: fixed;
+  text-align: center;
 }
 
 .choose__overflow{
@@ -2205,13 +2203,14 @@ margin: 0 .5rem;
     align-items: center;
   }
   .program{
-    background-attachment: fixed;
+  
   overflow: hidden;
-  background-image: linear-gradient(rgba(4, 9, 30, 0.8), rgba(4, 9, 30, 0.5)), url(../image/width.webp);
+  background: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, 0.7)), to(rgba(0, 0, 0, 0.7))), url(../image/Length.png) no-repeat;
+  background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url(../image/Length.png) no-repeat; 
   background-size: cover;
   background-position: center;
-  background-repeat: no-repeat;
-  padding-bottom: 0;
+  background-attachment: fixed;
+  text-align: center;
 }
   .choose__content .section__data,
   .choose__description{
