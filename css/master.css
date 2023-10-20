@@ -2531,7 +2531,7 @@ body:not(.dark-theme) main {
   background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url(../image/Untitled\ design\ \(2\).jpg) no-repeat;
   background-size: cover;
   background-position: center;
-  background-attachment: fixed;
+  /* background-attachment: fixed; */
   text-align: center;
 }
 @media screen and (min-width: 768px) {
@@ -2540,7 +2540,7 @@ body:not(.dark-theme) main {
   background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url(../image/jksmckj\ \(3\).jpg) no-repeat;
   background-size: cover;
   background-position: center;
-  background-attachment: fixed;
+  /* background-attachment: fixed; */
   text-align: center;
   }
 }
@@ -2548,7 +2548,7 @@ body:not(.dark-theme) main {
   .plll{
     background-image: linear-gradient(rgba(4,9,30,0.8) , rgb(4 9 30 / 50%)) ,url(../image/jksmckj\ \(2\).jpg);
     background-size: cover;
-    background-attachment: fixed;
+    /* background-attachment: fixed; */
     background-position: center top;
     background-repeat: no-repeat;
     padding-bottom: 0;
