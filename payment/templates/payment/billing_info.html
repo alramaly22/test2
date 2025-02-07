@@ -1,0 +1,78 @@
+{% extends 'base.html' %} {% load static %} {% block content %}
+<main class="main" id="main">
+  <div class="containershipping">
+    <!-- Order Summary -->
+    <div class="order-summary">
+      <h2>Order Summary</h2>
+      {% for product in cart_products %}
+      <div class="order-item">
+        <p><strong>{{ product.name }}:</strong> ${{ product.price }}</p>
+        <p>
+          <strong>Quantity:</strong>
+          {% for key, value in quantities.items %}
+          <!-- Order Summary -->{% with key_slug=key|slugify%}
+          <!-- Order Summary -->{% if key_slug == product.id %} {{ value }}
+          {%endif %} {% endwith %} {% endfor %}
+        </p>
+      </div>
+      {% endfor %}
+
+      <!-- Delivery Fee -->
+      <p>
+        <strong>Delivery Fee:</strong>
+        {% if delivery_fee > 0 %} ${{ delivery_fee }} {% else %} Free {% endif%}
+      </p>
+
+      <!-- Subtotal -->
+      <p><strong>Subtotal:</strong> ${{ totals }}</p>
+
+      <!-- Total Including Delivery -->
+      <p>
+        <strong>Total (Including Delivery):</strong> ${{ total_with_delivery }}
+      </p>
+
+      <!-- Discount Information -->
+      {% if discount_amount %}
+      <p><strong>Discount:</strong> ${{ discount_amount }}</p>
+      <p>
+        <strong>Final Total (Including Discount):</strong> ${{ final_total }}
+      </p>
+      {% endif %}
+
+      <!-- Update Items Button -->
+      <button
+        class="btn"
+        onclick="window.location.href='{% url 'cart_summary' %}'"
+      >
+        Update Items
+      </button>
+    </div>
+
+    <!-- Shipping Info -->
+    <div class="shipping-info">
+      <h2>Shipping Info</h2>
+      <div class="order-item">
+        <p><strong>Name:</strong> {{ shipping_info.full_name }}</p>
+        <p><strong>Email:</strong> {{ shipping_info.email }}</p>
+        <p><strong>Address 1:</strong> {{ shipping_info.address }}</p>
+        <p><strong>City:</strong> {{ shipping_info.city }}</p>
+        <p><strong>State:</strong> {{ shipping_info.state }}</p>
+        <p><strong>Country:</strong> {{ shipping_info.country }}</p>
+        <p><strong>Phone:</strong> {{ shipping_info.phone }}</p>
+      </div>
+      <a href="{% url 'checkout' %}">
+        <button class="btn">Update Shipping</button>
+      </a>
+    </div>
+
+    <!-- Billing Info -->
+    <div class="shipping-info">
+      <h2>Billing Info</h2>
+      <form method="post" action="{% url 'process_order' %}">
+        {% csrf_token %}
+        <button class="btn" type="submit">Confirm and Place Order</button>
+      </form>
+    </div>
+  </div>
+</main>
+{% endblock %}
