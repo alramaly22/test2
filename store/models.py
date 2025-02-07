@@ -2,6 +2,7 @@ from django.db import models
 import datetime
 from django.contrib.auth.models import User
 from django.db.models.signals import post_save
+from cloudinary.models import CloudinaryField
 
 
 # الملف الشخصي للمستخدم
@@ -55,17 +56,18 @@ class Product(models.Model):
     price = models.DecimalField(default=0, decimal_places=2, max_digits=6)
     category = models.ForeignKey(Category, on_delete=models.CASCADE, default=1)
     description = models.CharField(max_length=1000, default='', blank=True, null=True)
-    image = models.ImageField(upload_to='uploads/product/', null=True)
+    image = CloudinaryField('image', null=True)  # تعديل هنا
     is_sale = models.BooleanField(default=False)
     sale_price = models.DecimalField(default=0, decimal_places=2, max_digits=6)
-    sizes = models.CharField(max_length=100, blank=True, null=True)  # تأكد من وجود هذا الحقل
+    sizes = models.CharField(max_length=100, blank=True, null=True)
+
     def __str__(self):
         return self.name
 
 # الصور المرتبطة بالمنتجات
 class ProductImage(models.Model):
     product = models.ForeignKey(Product, related_name='images', on_delete=models.CASCADE)
-    image = models.ImageField(upload_to='uploads/product_images/')
+    image = CloudinaryField('image')  # تعديل هنا
 
     def __str__(self):
         return f"Image for {self.product.name}"
@@ -85,7 +87,7 @@ class Order(models.Model):
 
 # الصور المميزة
 class FeaturedImage(models.Model):
-    image = models.ImageField(upload_to='featured_images/')
+    image = CloudinaryField('image')  # تعديل هنا
     title = models.CharField(max_length=255, blank=True, null=True)
     likes_count = models.PositiveIntegerField(default=0)
     liked_by = models.ManyToManyField(User, related_name='liked_images', blank=True)
