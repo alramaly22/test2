@@ -13,6 +13,9 @@ import os
 from pathlib import Path
 from dotenv import load_dotenv  # قم بإضافة هذه المكتبة لتحميل متغيرات البيئة
 import dj_database_url
+import cloudinary
+import cloudinary.uploader
+import cloudinary.api
 # Load environment variables from .env file
 load_dotenv()  # قم بتحميل متغيرات البيئة من ملف .env
 
@@ -46,6 +49,8 @@ INSTALLED_APPS = [
     'cart',
     'payment',
     'store',
+    'cloudinary',  # ✅ أضف هذا
+    'cloudinary_storage',  # ✅ أضف هذا
 ]
 
 MIDDLEWARE = [
@@ -108,7 +113,7 @@ WSGI_APPLICATION = 'myproject.wsgi.application'
 
 # }
 DATABASES = {
-    'default': dj_database_url.config(default=os.getenv("DATABASE_URL"))
+    'default': dj_database_url.config(default=os.getenv('DATABASE_URL'))
 }
 
 # Password validation
@@ -148,7 +153,16 @@ STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME': 'dliwkyyog',
+    'API_KEY': '223659487284859',
+    'API_SECRET': 'HmQ8VWrqXOSkgADBQXahIK8Mjis'
+}
+
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
