@@ -161,7 +161,7 @@ CLOUDINARY_STORAGE = {
     'API_SECRET': 'HmQ8VWrqXOSkgADBQXahIK8Mjis'
 }
 
-DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+# DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
