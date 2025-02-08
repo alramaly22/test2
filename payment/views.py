@@ -35,19 +35,21 @@ def checkout(request):
     final_total = total_with_delivery - discount_amount
 
     if request.method == 'POST':
-        # إذا كان المستخدم مسجلاً دخوله نأخذ البيانات من Profile
-        if request.user.is_authenticated:
-            shipping_user = Profile.objects.get(user__id=request.user.id)
-            shipping_form = UserInfoForm(request.POST, instance=shipping_user)
-        else:
-            # إذا لم يكن المستخدم مسجلاً دخوله نستخدم نموذج جديد فارغ
-            shipping_form = UserInfoForm(request.POST)
-        
-        if shipping_form.is_valid():
-            # حفظ البيانات في قاعدة البيانات
-            shipping_form.save()
-            messages.success(request, "Your shipping information has been updated!")
-            return redirect('checkout')  # العودة لصفحة الـ checkout بعد حفظ البيانات
+        # حفظ بيانات الشحن في الجلسة
+        my_shipping = {
+            'full_name': request.POST.get('shipping_full_name'),
+            'email': request.POST.get('shipping_email'),
+            'address': request.POST.get('shipping_address1'),
+            'city': request.POST.get('shipping_city'),
+            'state': request.POST.get('shipping_state'),
+            'country': request.POST.get('shipping_country'),
+            'phone': request.POST.get('shipping_phone'),
+        }
+        request.session['my_shipping'] = my_shipping
+
+        # توجيه العميل إلى process_order
+        return redirect('process_order')
+
     else:
         # إذا كان الطلب GET نعرض النموذج المناسب
         if request.user.is_authenticated:
@@ -66,8 +68,6 @@ def checkout(request):
         "final_total": final_total,
         "shipping_form": shipping_form
     })
-
-
 def billing_info(request):
     """
     عرض صفحة معلومات الفوترة مع تفاصيل الشحن، حتى لغير المسجلين.
