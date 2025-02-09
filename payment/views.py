@@ -35,21 +35,19 @@ def checkout(request):
     final_total = total_with_delivery - discount_amount
 
     if request.method == 'POST':
-        # حفظ بيانات الشحن في الجلسة
-        my_shipping = {
-            'full_name': request.POST.get('shipping_full_name'),
-            'email': request.POST.get('shipping_email'),
-            'address': request.POST.get('shipping_address1'),
-            'city': request.POST.get('shipping_city'),
-            'state': request.POST.get('shipping_state'),
-            'country': request.POST.get('shipping_country'),
-            'phone': request.POST.get('shipping_phone'),
-        }
-        request.session['my_shipping'] = my_shipping
-
-        # توجيه العميل إلى process_order
-        return redirect('process_order')
-
+        # إذا كان المستخدم مسجلاً دخوله نأخذ البيانات من Profile
+        if request.user.is_authenticated:
+            shipping_user = Profile.objects.get(user__id=request.user.id)
+            shipping_form = UserInfoForm(request.POST, instance=shipping_user)
+        else:
+            # إذا لم يكن المستخدم مسجلاً دخوله نستخدم نموذج جديد فارغ
+            shipping_form = UserInfoForm(request.POST)
+        
+        if shipping_form.is_valid():
+            # حفظ البيانات في قاعدة البيانات
+            shipping_form.save()
+            messages.success(request, "Your shipping information has been updated!")
+            return redirect('checkout')  # العودة لصفحة الـ checkout بعد حفظ البيانات
     else:
         # إذا كان الطلب GET نعرض النموذج المناسب
         if request.user.is_authenticated:
@@ -68,6 +66,8 @@ def checkout(request):
         "final_total": final_total,
         "shipping_form": shipping_form
     })
+
+
 def billing_info(request):
     """
     عرض صفحة معلومات الفوترة مع تفاصيل الشحن، حتى لغير المسجلين.
@@ -88,20 +88,17 @@ def billing_info(request):
         cart_products = cart.get_prods()
         quantities = cart.get_quants()
         totals = cart.cart_total()
-
-        # رسوم التوصيل ثابتة ب 60 جنيه
         delivery_fee = Decimal('60.00')
-        total_with_delivery = totals + delivery_fee
+        discount_percentage = Decimal(request.session.get('discount_percentage', 0))
+        discount_amount = (totals * discount_percentage) / 100
+        final_total = totals + delivery_fee - discount_amount
 
-        # حساب السعر النهائي بعد الخصم إذا تم تطبيقه
-        discount_amount = Decimal(request.session.get('discount_amount', '0.00'))
-        final_total = total_with_delivery - discount_amount
-
+     
         return render(request, 'payment/billing_info.html', {
             "cart_products": cart_products,
             "quantities": quantities,
             "totals": totals,
-            "total_with_delivery": total_with_delivery,
+            "total_with_delivery": totals + delivery_fee,
             "delivery_fee": delivery_fee,
             "final_total": final_total,  # تمرير السعر النهائي بعد الخصم
             "shipping_info": my_shipping  # تمرير بيانات الشحن
@@ -111,21 +108,19 @@ def billing_info(request):
         messages.error(request, "Access Denied.")
         return redirect('home')
 def apply_promo_code(request):
-    """
-    تطبيق البرومو كود على الطلب.
-    """
     if request.method == 'POST':
         promo_code = request.POST.get('promo_code')
-        try:
-            promo = PromoCode.objects.get(code=promo_code, is_active=True)
+        promo = PromoCode.objects.filter(code=promo_code, is_active=True).first()
+
+        if promo:
             request.session['promo_code'] = promo.code
             request.session['discount_percentage'] = float(promo.discount_percentage)
-            return JsonResponse({
-                'success': True,
-                'discount_percentage': promo.discount_percentage
-            })
-        except PromoCode.DoesNotExist:
-            return JsonResponse({'success': False})
+
+            # تأكد من أن session يتم حفظه
+            request.session.modified = True
+
+            return JsonResponse({'success': True, 'discount_percentage': promo.discount_percentage})
+
     return JsonResponse({'success': False})
 
 def process_order(request):
