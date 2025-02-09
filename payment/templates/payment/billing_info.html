@@ -10,8 +10,9 @@
         <p>
           <strong>Quantity:</strong>
           {% for key, value in quantities.items %}
-          <!---->{% with key_slug=key|slugify %} {% if key_slug == product.id %}
-          {{ value }} {% endif %} {% endwith %} {% endfor %}
+          <!-- Order Summary -->{% with key_slug=key|slugify%}
+          <!-- Order Summary -->{% if key_slug == product.id %} {{ value }}
+          {%endif %} {% endwith %} {% endfor %}
         </p>
       </div>
       {% endfor %}
@@ -25,21 +26,18 @@
       <!-- Subtotal -->
       <p><strong>Subtotal:</strong> ${{ totals }}</p>
 
-      <!-- Promo Code (إذا تم تطبيقه) -->
-      {% if discount_amount > 0 %}
+      <!-- Total Including Delivery -->
       <p>
-        <strong>Promo Code Applied:</strong> {{ request.session.promo_code }}
+        <strong>Total (Including Delivery):</strong> ${{ total_with_delivery }}
       </p>
+
+      <!-- Discount Information -->
+      {% if discount_amount %}
+      <p><strong>Discount:</strong> ${{ discount_amount }}</p>
       <p>
-        <strong>Discount ({{ discount_percentage }}%):</strong>
-        -${{discount_amount }}
+        <strong>Final Total (Including Discount):</strong> ${{ final_total }}
       </p>
       {% endif %}
-
-      <!-- Total after Discount and Delivery -->
-      <p style="color: green; font-weight: bold">
-        <strong>Total after Discount:</strong> ${{ final_total }}
-      </p>
 
       <!-- Update Items Button -->
       <button

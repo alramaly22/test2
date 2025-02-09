@@ -4,52 +4,38 @@
     <!-- Order Summary -->
     <div class="order-summary">
       <h2>Order Summary</h2>
+      {% for product in cart_products %}
       <div class="order-item">
-        {% for product in cart_products %}
-        <p>
-          <strong>{{ product.name }}:</strong>
-          {% if product.is_sale %} ${{ product.sale_price }} {% else %}
-          ${{product.price }} {% endif %}
-        </p>
+        <p><strong>{{ product.name }}:</strong> ${{ product.price }}</p>
         <p>
           <strong>Quantity:</strong>
           {% for key, value in quantities.items %}
-          <!-- Order Summary -->
-          {% if key|slugify == product.id %} {{ value }} {% endif %} {% endfor%}
+          <!-- Order Summary -->{% with key_slug=key|slugify%}
+          <!-- Order Summary -->{% if key_slug == product.id %} {{ value }}
+          {%endif %} {% endwith %} {% endfor %}
         </p>
-        {% endfor %}
+      </div>
+      {% endfor %}
 
-        <!-- Delivery Fee -->
-        <p>
-          <strong>Delivery Fee:</strong>
-          {% if delivery_fee > 0 %} ${{ delivery_fee }} {% else %} Free
-          {%endif%}
-        </p>
+      <!-- Delivery Fee -->
+      <p>
+        <strong>Delivery Fee:</strong>
+        {% if delivery_fee > 0 %} ${{ delivery_fee }} {% else %} Free {% endif%}
+      </p>
 
-        <!-- Subtotal -->
-        <p><strong>Subtotal:</strong> ${{ totals }}</p>
+      <!-- Subtotal -->
+      <p><strong>Subtotal:</strong> ${{ totals }}</p>
 
-        <!-- Discount if applied -->
-        {% if discount_amount > 0 %}
-        <p>
-          <strong>Discount ({{ discount_percentage }}%):</strong>
-          -${{ discount_amount }}
-        </p>
-        {% endif %}
-
-        <!-- Total Including Delivery -->
-        <p>
-          <strong>Total (Including Delivery):</strong>
-          ${{ final_total }}
-        </p>
-
-        <!-- Promo Code Section -->
-        {% comment %}
-        <div class="promo-code">
-          <label style="margin-bottom: 1rem" for="promo_code"
-            >Promo Code:</label
-          >
-          <br />
+      <!-- Promo Code Section -->
+      <div class="promo-code-section">
+        <h3>Promo Code</h3>
+        <form
+          id="promo-form"
+          method="post"
+          action="{% url 'apply_promo_code' %}"
+          class="formpromocode"
+        >
+          {% csrf_token %}
           <input
             type="text"
             id="promo_code"
@@ -57,20 +43,39 @@
             placeholder="Enter Promo Code"
             class="inputpromo"
           />
-          <button type="button" id="apply_promo" class="btn">Apply</button>
-        </div>
-        {% endcomment %}
-
-        <a href="{% url 'cart_summary' %}">
-          <button class="btn">Update Items</button>
-        </a>
+          <button type="submit" class="btn">Apply</button>
+        </form>
+        {% if discount_amount %}
+        <p>
+          <strong>Discount ({{ discount_percentage }}%):</strong>
+          -${{ discount_amount }}
+        </p>
+        {% endif %}
       </div>
+
+      <!-- Total Including Delivery -->
+      <p>
+        <strong>Total (Including Delivery):</strong> ${{ total_with_delivery }}
+      </p>
+
+      <!-- Final Total After Discount -->
+      {% if discount_amount %}
+      <p><strong>Final Total (After Discount):</strong> ${{ final_total }}</p>
+      {% endif %}
+
+      <!-- Update Items Button -->
+      <button
+        class="btn"
+        onclick="window.location.href='{% url 'cart_summary' %}'"
+      >
+        Update Items
+      </button>
     </div>
 
     <!-- Shipping Info -->
     <div class="shipping-info">
       <h2>Shipping Info</h2>
-      <form method="POST" action="{% url 'billing_info' %}">
+      <form method="post" action="{% url 'process_order' %}">
         {% csrf_token %}
         <div class="form-group">
           <label for="shipping_full_name">Full Name</label>
@@ -142,7 +147,7 @@
             required
           />
         </div>
-        <button type="submit" class="btn">Submit</button>
+        <button type="submit" class="btn">Confirm and Place Order</button>
       </form>
     </div>
   </div>
@@ -151,7 +156,8 @@
 <script>
   // Apply Promo Code Functionality
   $(document).ready(function () {
-    $("#apply_promo").click(function () {
+    $("#promo-form").submit(function (e) {
+      e.preventDefault(); // Prevent the form from submitting normally
       var promo_code = $("#promo_code").val();
       if (promo_code) {
         $.ajax({
