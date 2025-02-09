@@ -5,23 +5,28 @@ from django.http import JsonResponse
 from django.contrib import messages
 from decimal import Decimal
 
+
 def cart_summary(request):
-    # الحصول على عربة التسوق
     cart = Cart(request)
     cart_products = cart.get_prods()
-    quantities = cart.get_quants()
-    totals = cart.cart_total()
 
-    # رسوم التوصيل ثابتة ب 60 جنيه
+    totals = cart.cart_total()
     delivery_fee = Decimal('60.00')
-    total_with_delivery = totals + delivery_fee
+
+    # حساب الخصم من الـ session
+    discount_percentage = Decimal(request.session.get('discount_percentage', 0))
+    discount_amount = (totals * discount_percentage) / 100
+    total_after_promo = totals + delivery_fee - discount_amount
 
     return render(request, "cart_summary.html", {
         "cart_products": cart_products,
-        "quantities": quantities,
         "totals": totals,
-        "total_with_delivery": total_with_delivery,
-        "delivery_fee": delivery_fee
+        "delivery_fee": delivery_fee,
+        "total_with_delivery": totals + delivery_fee,
+        "promo_code": request.session.get('promo_code', None),
+        "discount_percentage": discount_percentage,
+        "discount_amount": discount_amount,
+        "total_after_promo": total_after_promo,
     })
 def cart_add(request):
     cart = Cart(request)
