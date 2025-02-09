@@ -6,16 +6,20 @@
     {% if cart_products %}
       {% for product, item in cart_products.items %}
       <div class="cart-item">
-        <img src="{{ product.image.url }}" alt="Product Image" class="product-image2" />
+        <img
+          src="{{ product.image.url }}"
+          alt="Product Image"
+          class="product-image2"
+        />
         <div class="item-details">
           <h2 class="product-title2">{{ product.name }}</h2>
           <p class="product-description">{{ product.description }}</p>
 
-          <!-- عرض وتحديث المقاس كما كان -->
+          <!-- عرض وتحديث المقاس -->
           <div class="size-selection">
             <label style="color:white" for="size-{{ product.id }}">Size:</label>
             <select id="size-{{ product.id }}" class="size-select">
-              {% for size in product.sizes.split %}  <!-- تم إعادته كما كان -->
+              {% for size in product.sizes.split %}
                 <option value="{{ size }}" {% if size == item.size %}selected{% endif %}>{{ size }}</option>
               {% endfor %}
             </select>
@@ -44,8 +48,12 @@
 
           <div class="item-buttons">
             <a href="{% url 'home' %}" class="btn home-btn">Home</a>
-            <button class="btn update-btn" data-index="{{ product.id }}">Update</button>
-            <button class="btn remove-btn" data-index="{{ product.id }}">Remove</button>
+            <button class="btn update-btn" data-index="{{ product.id }}">
+              Update
+            </button>
+            <button class="btn remove-btn" data-index="{{ product.id }}">
+              Remove
+            </button>
           </div>
         </div>
       </div>
@@ -58,23 +66,15 @@
           Delivery Fee: <span class="delivery-fee">EGP{{ delivery_fee }}</span>
         </p>
 
-        {% if discount_amount > 0 %}
-        <p style="color: green;">
-          Discount ({{ discount_percentage }}%): -EGP{{ discount_amount }}
-        </p>
-        {% endif %}
-
         <p style="color: white">
-          <strong>Total after Promo:</strong>
-          <span class="total-price">EGP{{ total_after_promo }}</span>
+          Total with Delivery:
+          <span class="total-price">EGP{{ total_with_delivery }}</span>
         </p>
 
-        <!-- إدخال البرومو كود -->
-        <div class="promo-code">
-          <label for="promo_code">Promo Code:</label>
-          <input type="text" id="promo_code" name="promo_code" placeholder="Enter Promo Code" class="inputpromo" />
-          <button type="button" id="apply_promo" class="btn">Apply</button>
-        </div>
+        {% if promo_code %}
+        <p>Promo Code: <span class="promo-code">{{ promo_code }}</span></p>
+        <p>Total after Promo: <span class="total-price">EGP{{ total_after_promo }}</span></p>
+        {% endif %}
 
         <!-- زر Checkout مباشر دون الحاجة لتسجيل الدخول -->
         <a href="{% url 'checkout' %}" class="checkout-btn">Proceed to Checkout</a>
@@ -87,33 +87,6 @@
 </main>
 
 <script>
-  // تطبيق البرومو كود وتحديث الصفحة
-  $(document).ready(function () {
-    $("#apply_promo").click(function () {
-      var promo_code = $("#promo_code").val().trim();
-      if (!promo_code) {
-        alert("Please enter a promo code.");
-        return;
-      }
-      $.ajax({
-        type: "POST",
-        url: '{% url "apply_promo_code" %}',
-        data: {
-          promo_code: promo_code,
-          csrfmiddlewaretoken: "{{ csrf_token }}",
-        },
-        success: function (response) {
-          if (response.success) {
-            alert("Promo code applied! Discount: " + response.discount_percentage + "%");
-            location.reload();
-          } else {
-            alert("Invalid promo code.");
-          }
-        },
-      });
-    });
-  });
-
   // تحديث الكمية والمقاس في عربة التسوق
   $(document).on('click', '.update-btn', function(e){
     e.preventDefault();
@@ -124,8 +97,8 @@
       url: '{% url 'cart_update' %}',
       data: {
         product_id: productid,
-        product_qty: $('#quantity-' + productid).val(),
-        product_size: $('#size-' + productid).val(),
+        product_qty: $('#quantity-' + productid).val(),  // إرسال الكمية
+        product_size: $('#size-' + productid).val(),  // إرسال المقاس
         csrfmiddlewaretoken: '{{ csrf_token }}',
         action: 'post'
       },
