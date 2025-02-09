@@ -33,6 +33,9 @@ DEBUG = os.getenv('DJANGO_DEBUG', 'True') == 'True'
 
 ALLOWED_HOSTS = os.getenv('DJANGO_ALLOWED_HOSTS', '127.0.0.1,localhost').split(',')
 ALLOWED_HOSTS.append('.vercel.app')
+ALLOWED_HOSTS.append('dragonsportswear.store')
+ALLOWED_HOSTS.append('.dragonsportswear.store')  # لدعم النطاقات الفرعية
+
 
 # Stripe API Key
 STRIPE_API_KEY = os.getenv('STRIPE_API_KEY')  # قم بإضافة هذا المتغير لقراءة مفتاح Stripe API من متغيرات البيئة
