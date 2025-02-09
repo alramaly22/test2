@@ -171,7 +171,14 @@ cloudinary.config(
   api_key=os.environ.get('CLOUDINARY_API_KEY'), 
   api_secret=os.environ.get('CLOUDINARY_API_SECRET')
 )
-
+SESSION_ENGINE = 'django.contrib.sessions.backends.db'
+SESSION_COOKIE_SECURE = True  # تأمين الكوكيز على HTTPS
+SESSION_COOKIE_HTTPONLY = True  # منع الوصول إلى الجلسة من JavaScript
+SESSION_COOKIE_SAMESITE = 'Lax'  # السماح بإرسال الجلسة بين الصفحات
+SESSION_COOKIE_AGE = 86400  # الجلسة تبقى نشطة لمدة يوم واحد
+SESSION_SAVE_EVERY_REQUEST = True  # حفظ الجلسة مع كل طلب
+SESSION_EXPIRE_AT_BROWSER_CLOSE = False  # لا تحذف الجلسة عند إغلاق المتصفح
+CSRF_COOKIE_SECURE = True
 
 
 # DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
