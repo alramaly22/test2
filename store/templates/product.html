@@ -28,17 +28,17 @@
 
         <div class="price">
           {% if product.is_sale %}
-          <span class="current-price">${{ product.sale_price }}</span>
-          <span class="discount">{{ product.discount_percentage }}% off</span>
-          <span class="original-price">${{ product.price }}</span>
+          <span class="current-price">EGP{{ product.sale_price }}</span>
+          <span class="discount">{{ product.discount_percentage }}% 30</span>
+          <span class="original-price">EGP{{ product.price }}</span>
           {% else %}
-          <span class="current-price">${{ product.price }}</span>
+          <span class="current-price">EGP{{ product.price }}</span>
           {% endif %}
         </div>
 
         <!-- إضافة اختيار المقاس -->
         <div class="size-selection">
-          <label for="size" style="color: white;">Size:</label>
+          <label for="size" style="color: white">Size:</label>
           <select id="size" name="size" class="size-select">
             {% if product.sizes %} {% for size in product.sizes.split %}
             <option value="{{ size }}">{{ size }}</option>
