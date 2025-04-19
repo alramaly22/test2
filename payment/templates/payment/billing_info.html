@@ -1,0 +1,81 @@
+{% extends 'base.html' %} {% load static %} {% block content %}
+<main class="main" id="main">
+  <div class="containershipping">
+    <!-- Order Summary -->
+    <div class="order-summary">
+      <h2>Order Summary</h2>
+      {% for product in cart_products %}
+      <div class="order-item">
+        <p><strong>{{ product.name }}:</strong> ${{ product.price }}</p>
+        <p>
+          <strong>Quantity:</strong>
+          {% for key, value in quantities.items %}
+          <!---->{% with key_slug=key|slugify %} {% if key_slug == product.id %}
+          {{ value }} {% endif %} {% endwith %} {% endfor %}
+        </p>
+      </div>
+      {% endfor %}
+
+      <!-- Delivery Fee -->
+      <p>
+        <strong>Delivery Fee:</strong>
+        {% if delivery_fee > 0 %} EGP{{ delivery_fee }} {% else %} Free
+        {%endif%}
+      </p>
+
+      <!-- Subtotal -->
+      <p><strong>Subtotal:</strong> EGP{{ totals }}</p>
+
+      <!-- Promo Code (إذا تم تطبيقه) -->
+      {% if discount_amount > 0 %}
+      <p>
+        <strong>Promo Code Applied:</strong> {{ request.session.promo_code }}
+      </p>
+      <p>
+        <strong>Discount ({{ discount_percentage }}%):</strong>
+        -EGP{{discount_amount }}
+      </p>
+      {% endif %}
+
+      <!-- Total after Discount and Delivery -->
+      <p style="color: #03ff03;font-weight: bolder; font-size: 20px;}">
+        <strong>Total after Discount:</strong> EGP{{ final_total }}
+      </p>
+
+      <!-- Update Items Button -->
+      <button
+        class="btn"
+        onclick="window.location.href='{% url 'cart_summary' %}'"
+      >
+        Update Items
+      </button>
+    </div>
+
+    <!-- Shipping Info -->
+    <div class="shipping-info">
+      <h2>Shipping Info</h2>
+      <div class="order-item">
+        <p><strong>Name:</strong> {{ shipping_info.full_name }}</p>
+        <p><strong>Email:</strong> {{ shipping_info.email }}</p>
+        <p><strong>Address 1:</strong> {{ shipping_info.address }}</p>
+        <p><strong>City:</strong> {{ shipping_info.city }}</p>
+        <p><strong>State:</strong> {{ shipping_info.state }}</p>
+        <p><strong>Country:</strong> {{ shipping_info.country }}</p>
+        <p><strong>Phone:</strong> {{ shipping_info.phone }}</p>
+      </div>
+      <a href="{% url 'checkout' %}">
+        <button class="btn">Update Shipping</button>
+      </a>
+    </div>
+
+    <!-- Billing Info -->
+    <div class="shipping-info">
+      <h2>Billing Info</h2>
+      <form method="post" action="{% url 'process_order' %}">
+        {% csrf_token %}
+        <button class="btn" type="submit">Confirm and Place Order</button>
+      </form>
+    </div>
+  </div>
+</main>
+{% endblock %}

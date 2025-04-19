@@ -1,0 +1,177 @@
+{% extends 'base.html' %} {% load static %} {% block content %}
+<main class="main" id="main">
+  <div class="containershipping">
+    <!-- Order Summary -->
+    <div class="order-summary">
+      <h2>Order Summary</h2>
+      <div class="order-item">
+        {% for product in cart_products %}
+        <p>
+          <strong>{{ product.name }}:</strong>
+          {% if product.is_sale %} EGP{{ product.sale_price }}<!-- -->
+          {% else %} ${{ product.price }} {% endif %}
+        </p>
+        <p>
+          <strong>Quantity:</strong>
+          {% for key, value in quantities.items %}
+          <!--  -->{% if key|slugify == product.id|slugify %}<!--  -->
+          {{ value }} {% endif %} {% endfor %}
+        </p>
+        {% endfor %}
+
+        <!-- Delivery Fee -->
+        <p><strong>Delivery Fee:</strong> EGP{{ delivery_fee }}</p>
+
+        <!-- Subtotal -->
+        <p><strong>Subtotal:</strong> EGP{{ totals }}</p>
+
+        <!-- Discount if applied -->
+        {% if discount_amount > 0 %}
+        <p>
+          <strong>Discount ({{ discount_percentage }}%):</strong>
+          -${{discount_amount }}
+        </p>
+        {% endif %}
+
+        <!-- Total Including Delivery -->
+        <p><strong>Total (Including Delivery):</strong> EGP{{ final_total }}</p>
+
+        <!-- Promo Code Section -->
+        {% comment %}
+        <div class="promo-code">
+          <label style="margin-bottom: 1rem" for="promo_code"
+            >Promo Code:</label
+          >
+          <br />
+          <input
+            type="text"
+            id="promo_code"
+            name="promo_code"
+            placeholder="Enter Promo Code"
+            class="inputpromo"
+          />
+          <button type="button" id="apply_promo" class="btn">Apply</button>
+        </div>
+        {% endcomment %}
+
+        <a href="{% url 'cart_summary' %}">
+          <button class="btn">Update Items</button>
+        </a>
+      </div>
+    </div>
+
+    <!-- Shipping Info -->
+    <div class="shipping-info">
+      <h2>Shipping Info</h2>
+      <form method="POST" action="{% url 'billing_info' %}">
+        {% csrf_token %}
+        <div class="form-group">
+          <label for="shipping_full_name">Full Name</label>
+          <input
+            type="text"
+            id="shipping_full_name"
+            name="shipping_full_name"
+            value="{{ shipping_form.full_name.value|default_if_none:'' }}"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="shipping_email">Email Address</label>
+          <input
+            type="email"
+            id="shipping_email"
+            name="shipping_email"
+            value="{{ shipping_form.email.value|default_if_none:'' }}"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="shipping_phone">Phone Number</label>
+          <input
+            type="text"
+            id="shipping_phone"
+            name="shipping_phone"
+            value="{{ shipping_form.phone.value|default_if_none:'' }}"
+            required
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="shipping_address1">Address Line 1</label>
+          <input
+            type="text"
+            id="shipping_address1"
+            name="shipping_address1"
+            value="{{ shipping_form.address.value|default_if_none:'' }}"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="shipping_city">City</label>
+          <input
+            type="text"
+            id="shipping_city"
+            name="shipping_city"
+            value="{{ shipping_form.city.value|default_if_none:'' }}"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="shipping_state">State</label>
+          <input
+            type="text"
+            id="shipping_state"
+            name="shipping_state"
+            value="{{ shipping_form.state.value|default_if_none:'' }}"
+          />
+        </div>
+        <div class="form-group">
+          <label for="shipping_country">Country</label>
+          <input
+            type="text"
+            id="shipping_country"
+            name="shipping_country"
+            value="{{ shipping_form.country.value|default_if_none:'' }}"
+            required
+          />
+        </div>
+        <button type="submit" class="btn">Submit</button>
+      </form>
+    </div>
+  </div>
+</main>
+
+<script>
+  // Apply Promo Code Functionality
+  $(document).ready(function () {
+    $("#apply_promo").click(function () {
+      var promo_code = $("#promo_code").val();
+      if (promo_code) {
+        $.ajax({
+          type: "POST",
+          url: '{% url "apply_promo_code" %}',
+          data: {
+            promo_code: promo_code,
+            csrfmiddlewaretoken: "{{ csrf_token }}",
+          },
+          success: function (response) {
+            if (response.success) {
+              alert(
+                "Promo code applied! Discount: " +
+                  response.discount_percentage +
+                  "%"
+              );
+              location.reload(); // Reload page to update prices
+            } else {
+              alert("Invalid promo code.");
+            }
+          },
+        });
+      } else {
+        alert("Please enter a promo code.");
+      }
+    });
+  });
+</script>
+
+{% endblock %}
