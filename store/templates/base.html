@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <meta name="csrf-token" content="{{ csrf_token }}" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>{% block title %}Ecommerce{% endblock %}</title>
+    <!-- Favicon-->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/3.4.0/remixicon.css"
+      crossorigin=""
+    />
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    <link rel="icon" type="image/x-icon" href="{% static 'img/LL.png' %}" />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/swiper/swiper-bundle.min.css"
+    />
+    <!-- Core theme CSS (includes Bootstrap)-->
+    <link href="{% static 'css/style.css' %}" rel="stylesheet" />
+    <script
+      src="https://code.jquery.com/jquery-3.7.1.min.js"
+      integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body>
+    {% include 'navbar.html' %}
+
+    <!-- تنبيه عند وجود رسائل -->
+    {% if messages %}
+    <div id="custom-alert" class="alert-container" style="display: none">
+      <div class="alert-box">
+        <span class="alert-message" id="alert-message"></span>
+        <button class="alert-close-btn" onclick="closeAlert()">X</button>
+      </div>
+    </div>
+    {% endif %}
+
+    <!-- Main content area -->
+    {% block content %}{% endblock %}
+
+    <!-- Footer-->
+    <footer class="footer">
+      <div class="footer__container container grid">
+        <div>
+          <a href="#" class="footer__logo">
+            <img src="{% static 'img/LL.png' %}" alt="" />
+          </a>
+        </div>
+        <div class="footer__data grid">
+          <div>
+            <h3 class="footer__title">Product Type</h3>
+            <ul class="footer__links">
+              <li>
+                <a href="{% url 'category' 'Sweet-Pants'%}" class="footer__link"
+                  >Sweatpants</a
+                >
+              </li>
+              <li>
+                <a href="{% url 'category' 'Shorts'%}" class="footer__link"
+                  >Shorts</a
+                >
+              </li>
+              <li>
+                <a href="{% url 'category' 'T-shirt'%}" class="footer__link"
+                  >T-Shirts</a
+                >
+              </li>
+            </ul>
+          </div>
+
+          
+          <div>
+            <h3 class="footer__title">Gender</h3>
+            <ul class="footer__links">
+              <li>
+                <a href="{% url 'collection' 'men' %}" class="footer__link">Men</a>
+              </li>
+              <li>
+                <a href="{% url 'collection' 'women' %}" class="footer__link">Women</a>
+              </li>
+            </ul>
+          </div>
+          
+          <div class="footer__group">
+            <form action="" class="footer__form">
+              <input type="email" placeholder="Email" class="footer__input" />
+              <button class="footer__button button">
+                Subscribe <i class="ri-send-plane-fill"></i>
+              </button>
+            </form>
+            <div class="footer__secial">
+              <a
+                href="https://www.instagram.com/dragon.fit.sportswear?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw=="
+                target="_blank"
+                class="footer__social-link"
+              >
+                <i class="ri-instagram-fill"></i>
+              </a>
+
+              <a
+              href="https://www.facebook.com/profile.php?id=61572174321039&mibextid=wwXIfr&rdid=WhJ7pUZiJ4bzQtNr&share_url=https%3A%2F%2Fwww.facebook.com%2Fshare%2F14vwSwu7mb%2F%3Fmibextid%3DwwXIfr#"
+              target="_blank"
+              class="footer__social-link"
+            >
+            <i class="ri-facebook-fill"></i>            </a>
+
+            <a
+            href="https://www.tiktok.com/@dragon.fit.sportswear?_t=ZS-8t0YuWVTOq7&_r=1"
+            target="_blank"
+            class="footer__social-link"
+          >
+          <i class="ri-tiktok-fill"></i>          </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <span class="footer__copy">
+        &#169; All Rights Reserved By MoAlramlay
+      </span>
+    </footer>
+    <!--========== SCROLL UP ==========-->
+    <a href="" class="scrollup" id="scroll-up">
+      <i class="ri-instagram-fill"></i>
+    </a>
+
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+    <!-- Core theme JS-->
+    <script>
+      // دالة لعرض التنبيه
+      function showAlert(message, type = "warning") {
+        const alertContainer = document.getElementById("custom-alert");
+        const alertMessage = document.getElementById("alert-message");
+
+        // تحقق من وجود العناصر في الصفحة
+        if (!alertContainer || !alertMessage) {
+          console.error("Alert container or message element not found.");
+          return;
+        }
+
+        // تعيين الرسالة إلى عنصر التنبيه
+        alertMessage.textContent = message;
+
+        // إزالة أي فئات تنبيه سابقة
+        alertContainer.classList.remove(
+          "alert-success",
+          "alert-warning",
+          "alert-danger"
+        );
+
+        // إضافة الفئة المناسبة حسب نوع التنبيه
+        alertContainer.classList.add(`alert-${type}`);
+
+        // عرض التنبيه
+        alertContainer.style.display = "block";
+
+        // إغلاق التنبيه بعد 3 ثوانٍ
+        setTimeout(() => closeAlert(alertContainer), 3000);
+      }
+
+      // دالة لإغلاق التنبيه يدويًا
+      function closeAlert(alertContainer = null) {
+        if (!alertContainer) {
+          alertContainer = document.getElementById("custom-alert");
+        }
+
+        if (alertContainer) {
+          alertContainer.style.display = "none";
+        }
+      }
+
+      // إضافة اختبار مباشر عند تحميل الصفحة
+      document.addEventListener("DOMContentLoaded", () => {
+        {% if messages %}
+          {% for message in messages %}
+            showAlert("{{ message }}", "success");
+          {% endfor %}
+        {% endif %}
+      });
+    </script>
+
+    <script src="{% static 'js/scripts.js' %}"></script>
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+
+    <script>
+      AOS.init({
+        offset: 200,
+        duration: 1500,
+      });
+    </script>
+  </body>
+</html>

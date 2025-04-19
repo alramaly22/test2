@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% load static %}
+<!-- This line loads the static tag -->
+{% block content %}
+<main class="main" id="main">
+  <section class="collection-section section">
+    <h1 class="section-title">{{ type_name|title }} Collection</h1>
+    <div class="card2-container">
+      {% for product in products %}
+      <div class="card2">
+        <img
+          src="{{ product.image.url }}"
+          alt="Product Image"
+          class="card2-img"
+        />
+        <div class="card2-body">
+          <h2 class="card2-title">{{ product.name }}</h2>
+          <p class="card2-price">
+            {% if product.is_sale %}
+            <strike>${{ product.price }}</strike>
+            <span class="sale-price">${{ product.sale_price }}</span>
+            {% else %} ${{ product.price }} {% endif %}
+          </p>
+          <a href="{% url 'product' product.id %}" class="card2-btn">
+            View Product
+          </a>
+        </div>
+      </div>
+      {% empty %}
+      <p>No products available in this collection.</p>
+      {% endfor %}
+    </div>
+  </section>
+</main>
+{% endblock %}

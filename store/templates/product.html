@@ -1,0 +1,117 @@
+{% extends 'base.html' %} {% load static %} {% block content %}
+<!--=============== MAIN ===============-->
+<main class="main" id="main">
+  <div class="container productcontainer">
+    <div class="product">
+      <!-- Product Image Section -->
+      <div class="product-image">
+        <img id="mainImage" src="{{ product.image.url }}" alt="Product Image" />
+        <div class="thumbnails">
+          <!-- عرض الصور المصغرة -->
+          <div class="thumbnails">
+            {% for image in product_images %}
+            <img
+              onclick="changeImage('{{ image.image.url }}')"
+              src="{{ image.image.url }}"
+              alt="Thumbnail {{ forloop.counter }}"
+            />
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+
+      <!-- Product Details Section -->
+      <div class="product-details">
+        <h2>{{ product.brand }}</h2>
+        <h1>{{ product.name }}</h1>
+        <p>{{ product.description }}</p>
+
+        <div class="price">
+          {% if product.is_sale %}
+          <span class="current-price">EGP{{ product.sale_price }}</span>
+          <span class="discount">{{ product.discount_percentage }}% 30</span>
+          <span class="original-price">EGP{{ product.price }}</span>
+          {% else %}
+          <span class="current-price">EGP{{ product.price }}</span>
+          {% endif %}
+        </div>
+
+        <!-- إضافة اختيار المقاس -->
+        <div class="size-selection">
+          <label for="size" style="color: white">Size:</label>
+          <select id="size" name="size" class="size-select">
+            {% if product.sizes %} {% for size in product.sizes.split %}
+            <option value="{{ size }}">{{ size }}</option>
+            {% endfor %} {% else %}
+            <option value="One Size">One Size</option>
+            {% endif %}
+          </select>
+        </div>
+
+        <div class="quantity">
+          <button onclick="decreaseQuantity()">-</button>
+          <input id="quantity" type="number" value="1" readonly />
+          <button onclick="increaseQuantity()">+</button>
+        </div>
+
+        <div class="button-container">
+          <a href="{% url 'home' %}" class="btn homeee">Home</a>
+          <button
+            type="button"
+            value="{{ product.id }}"
+            class="btn add-to-cart"
+            id="add-cart"
+          >
+            Add to Cart
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<script>
+  // تغيير الصورة الرئيسية عند النقر على الصورة المصغرة
+  function changeImage(imageUrl) {
+      document.getElementById("mainImage").src = imageUrl;
+  }
+
+  // زيادة الكمية
+  function increaseQuantity() {
+      var quantityInput = document.getElementById("quantity");
+      quantityInput.value = parseInt(quantityInput.value) + 1;
+  }
+
+  // تقليل الكمية
+  function decreaseQuantity() {
+      var quantityInput = document.getElementById("quantity");
+      if (quantityInput.value > 1) {
+          quantityInput.value = parseInt(quantityInput.value) - 1;
+      }
+  }
+
+  // إضافة المنتج إلى عربة التسوق باستخدام Ajax
+  $(document).on('click', '#add-cart', function(e) {
+      e.preventDefault();
+      $.ajax({
+          type: 'POST',
+          url: '{% url 'cart_add' %}',
+          data: {
+              product_id: $('#add-cart').val(),
+              product_qty: $('#quantity').val(),
+              product_size: $('#size').val(),  // إرسال المقاس
+              csrfmiddlewaretoken: '{{ csrf_token }}',
+              action: 'post'
+          },
+          success: function(json) {
+              document.getElementById("cart_quantity").textContent = json.qty;
+              location.reload();
+          },
+          error: function(xhr, errmsg, err) {
+              console.error("Error: " + errmsg);
+          }
+      });
+  });
+</script>
+
+{% endblock %}

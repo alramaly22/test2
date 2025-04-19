@@ -1,0 +1,124 @@
+{% extends 'base.html' %} {% load static %} {% block content %}
+<main style="    margin-top: 4rem;background: linear-gradient(7deg, black, transparent);" class="main" id="main">
+  <!-- زر Skip للتخطي إلى الصفحة الرئيسية -->
+  <div class="skip-container">
+    <a href="{% url 'home' %}" class="button2 button--flex"
+      >Skip <i class="ri-arrow-right-double-line"></i
+    ></a>
+  </div>
+
+  <div class="info-container">
+    <!-- قسم Shipping Information -->
+    <div class="info-section">
+      <h2 class="info-title">Shipping Information</h2>
+      <form method="POST" action="{% url 'update_info' %}">
+        {% csrf_token %}
+        <div class="info-fields">
+          <!-- Full Name -->
+          <div class="info-field">
+            <label for="id_full_name">Full Name:</label>
+            <input
+              type="text"
+              id="id_full_name"
+              name="full_name"
+              class="info-field-input"
+              placeholder="Full Name"
+              value="{{ form.full_name.value|default_if_none:'' }}"
+              required
+            />
+          </div>
+
+          <!-- Phone -->
+          <div class="info-field">
+            <label for="id_phone">Phone:</label>
+            <input
+              type="text"
+              id="id_phone"
+              name="phone"
+              class="info-field-input"
+              placeholder="Phone"
+              value="{{ form.phone.value|default_if_none:'' }}"
+              required
+            />
+          </div>
+
+          <!-- Email -->
+          <div class="info-field">
+            <label for="id_email">Email:</label>
+            <input
+              type="email"
+              id="id_email"
+              name="email"
+              class="info-field-input"
+              placeholder="Email"
+              value="{{ form.email.value|default_if_none:'' }}"
+              required
+            />
+          </div>
+
+          <!-- Address -->
+          <div class="info-field">
+            <label for="id_address">Address:</label>
+            <input
+              type="text"
+              id="id_address"
+              name="address"
+              class="info-field-input"
+              placeholder="Address"
+              value="{{ form.address.value|default_if_none:'' }}"
+              required
+            />
+          </div>
+
+          <!-- City -->
+          <div class="info-field">
+            <label for="id_city">City:</label>
+            <input
+              type="text"
+              id="id_city"
+              name="city"
+              class="info-field-input"
+              placeholder="City"
+              value="{{ form.city.value|default_if_none:'' }}"
+              required
+            />
+          </div>
+
+          <!-- State -->
+          <div class="info-field">
+            <label for="id_state">State:</label>
+            <input
+              type="text"
+              id="id_state"
+              name="state"
+              class="info-field-input"
+              placeholder="State"
+              value="{{ form.state.value|default_if_none:'' }}"
+              required
+            />
+          </div>
+
+          <!-- Country -->
+          <div class="info-field">
+            <label for="id_country">Country:</label>
+            <input
+              type="text"
+              id="id_country"
+              name="country"
+              class="info-field-input"
+              placeholder="Country"
+              value="{{ form.country.value|default_if_none:'' }}"
+              required
+            />
+          </div>
+        </div>
+
+        <!-- زر التحديث -->
+        <button type="submit" class="info-btn btn btn-secondary">
+          Update Profile
+        </button>
+      </form>
+    </div>
+  </div>
+</main>
+{% endblock %}
